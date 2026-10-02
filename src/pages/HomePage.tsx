@@ -68,7 +68,7 @@ export default function HomePage() {
                 <section
                   key={cat.id}
                   id={`section-${cat.id}`}
-                  ref={el => { sectionRefs.current[cat.id] = el; }}
+                  ref={el => { sectionRefs.current[cat.id] = el as HTMLDivElement | null; }}
                   className="mb-10 scroll-mt-36"
                 >
                   <h2 className="section-title flex items-center gap-3">

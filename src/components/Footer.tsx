@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FiInstagram, FiFacebook, FiTwitter, FiHeart } from 'react-icons/fi';
+import { FiInstagram, FiFacebook, FiTwitter } from 'react-icons/fi';
 
 const legalLinks = [
   { label: 'Privacy Policy', to: '/privacy-policy' },
