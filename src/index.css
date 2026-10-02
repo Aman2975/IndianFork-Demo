@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #333333;
+    background-color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #FF6B00;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white font-semibold px-6 py-2.5 rounded-lg
+      hover:bg-primary-hover transition-all duration-300
+      active:scale-95 shadow-md hover:shadow-lg;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary font-semibold px-6 py-2.5 rounded-lg
+      hover:bg-primary hover:text-white transition-all duration-300 active:scale-95;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-200
+      focus:border-primary focus:ring-2 focus:ring-primary/20
+      outline-none transition-all duration-300
+      placeholder:text-medium-gray;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20;
+  }
+
+  .section-title {
+    @apply text-2xl md:text-3xl font-bold text-dark-gray mb-6
+      pb-3 border-b-2 border-primary/30;
+  }
+
+  .badge {
+    @apply absolute -top-2 -right-2 bg-primary text-white text-xs
+      font-bold w-5 h-5 flex items-center justify-center rounded-full;
+  }
+}
+
+/* Offer banner carousel */
+.carousel-container {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+.carousel-item {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* Mobile category bar horizontal scroll */
+.category-scroll {
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.category-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Toast custom styles */
+.toast-custom {
+  background: linear-gradient(135deg, #FF6B00, #FF8C00) !important;
+  color: white !important;
+  font-weight: 500 !important;
+  border-radius: 12px !important;
+  padding: 12px 20px !important;
+}
