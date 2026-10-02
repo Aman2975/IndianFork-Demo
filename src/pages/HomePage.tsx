@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import OffersBanner from '../components/OffersBanner';
-import Sidebar from '../components/Sidebar';
+import { DesktopSidebar, MobileCategoryBar } from '../components/Sidebar';
 import FoodCard from '../components/FoodCard';
 import { categories, menuItems } from '../data/menuData';
 
@@ -49,11 +49,17 @@ export default function HomePage() {
       {/* Hero / Offers */}
       <OffersBanner />
 
+      {/* Mobile: horizontal category bar (outside flex so it doesn't break mobile layout) */}
+      <MobileCategoryBar
+        activeCategory={activeCategory}
+        onCategoryClick={handleCategoryClick}
+      />
+
       {/* Menu Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="flex gap-6">
-          {/* Sidebar */}
-          <Sidebar
+        <div className="lg:flex lg:gap-6">
+          {/* Desktop: vertical sticky sidebar */}
+          <DesktopSidebar
             activeCategory={activeCategory}
             onCategoryClick={handleCategoryClick}
           />

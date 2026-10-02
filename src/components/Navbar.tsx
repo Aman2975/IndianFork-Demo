@@ -210,26 +210,6 @@ export default function Navbar() {
         {showMobileMenu && (
           <div className="md:hidden bg-white border-t border-gray-100 animate-fade-in">
             <div className="px-4 py-3 space-y-1">
-              {/* Location */}
-              <div className="py-2">
-                <p className="text-xs text-medium-gray font-medium mb-2 uppercase tracking-wider">Location</p>
-                <div className="flex flex-wrap gap-2">
-                  {cities.map(city => (
-                    <button
-                      key={city}
-                      onClick={() => {
-                        setSelectedCity(city);
-                      }}
-                      className={`px-3 py-1.5 rounded-full text-sm transition-colors ${selectedCity === city ? 'bg-primary text-white' : 'bg-light-gray text-dark-gray hover:bg-light-orange'}`}
-                    >
-                      {city}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <hr className="border-gray-100" />
-
               {/* Nav Links */}
               <Link
                 to="/"
@@ -248,20 +228,56 @@ export default function Navbar() {
 
               <hr className="border-gray-100" />
 
-              {/* Notifications */}
-              <div className="py-2">
-                <p className="text-xs text-medium-gray font-medium mb-2 uppercase tracking-wider flex items-center gap-1.5">
-                  <FiBell className="w-3.5 h-3.5" /> Notifications
-                  <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-                </p>
-                {notifications.map(notif => (
-                  <div key={notif.id} className={`px-3 py-2 rounded-lg mb-1 ${notif.isNew ? 'bg-light-orange/30' : 'bg-light-gray'}`}>
-                    <p className="text-sm text-dark-gray">{notif.message}</p>
-                    <p className="text-xs text-medium-gray mt-0.5">{notif.time}</p>
-                  </div>
-                ))}
-              </div>
+              {/* Location — collapsible */}
+              <button
+                onClick={() => setShowCityDropdown(prev => !prev)}
+                className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-dark-gray hover:bg-light-gray transition-colors"
+              >
+                <span className="flex items-center gap-2">
+                  <FiMapPin className="w-4 h-4 text-primary" />
+                  {selectedCity ? `📍 ${selectedCity}` : 'Select Location'}
+                </span>
+                <FiChevronDown className={`w-4 h-4 text-medium-gray transition-transform duration-200 ${showCityDropdown ? 'rotate-180' : ''}`} />
+              </button>
+              {showCityDropdown && (
+                <div className="flex flex-wrap gap-2 px-3 pb-2 animate-fade-in">
+                  {cities.map(city => (
+                    <button
+                      key={city}
+                      onClick={() => {
+                        setSelectedCity(city);
+                        setShowCityDropdown(false);
+                      }}
+                      className={`px-3 py-1.5 rounded-full text-sm transition-colors ${selectedCity === city ? 'bg-primary text-white' : 'bg-light-gray text-dark-gray hover:bg-light-orange'}`}
+                    >
+                      {city}
+                    </button>
+                  ))}
+                </div>
+              )}
 
+              {/* Notifications — collapsible */}
+              <button
+                onClick={() => setShowNotifications(prev => !prev)}
+                className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-dark-gray hover:bg-light-gray transition-colors"
+              >
+                <span className="flex items-center gap-2">
+                  <FiBell className="w-4 h-4 text-dark-gray" />
+                  Notifications
+                  <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+                </span>
+                <FiChevronDown className={`w-4 h-4 text-medium-gray transition-transform duration-200 ${showNotifications ? 'rotate-180' : ''}`} />
+              </button>
+              {showNotifications && (
+                <div className="px-3 pb-2 space-y-1 animate-fade-in">
+                  {notifications.map(notif => (
+                    <div key={notif.id} className={`px-3 py-2 rounded-lg ${notif.isNew ? 'bg-light-orange/30' : 'bg-light-gray'}`}>
+                      <p className="text-sm text-dark-gray">{notif.message}</p>
+                      <p className="text-xs text-medium-gray mt-0.5">{notif.time}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
               <hr className="border-gray-100" />
 
               <button
